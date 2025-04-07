@@ -13,14 +13,14 @@ class TAArray {
     TAArray();
     ~TAArray();
 
-    bool addTextArea(TextArea* ta);
-    bool addTextArea(TextArea* ta, int index);
+    bool add(TextArea* ta);
+    bool add(TextArea* ta, int index);
 
-    TextArea* removeTextArea(int index);
-    TextArea* removeTextArea(const string& id);
+    TextArea* remove(int index);
+    TextArea* remove(const string& id);
 
-    TextArea* getTextArea(int index) const;
-    TextArea* getTextArea(const string& id) const;
+    TextArea* get(int index) const;
+    TextArea* get(const string& id) const;
 
     int getCount() const;
     void printTextAreas() const;
