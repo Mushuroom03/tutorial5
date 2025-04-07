@@ -22,7 +22,7 @@ class TAArray {
     TextArea* get(int index) const;
     TextArea* get(const string& id) const;
 
-    int getCount() const;
+    int getSize() const;
     void printTextAreas() const;
 };
 
