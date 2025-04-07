@@ -51,7 +51,7 @@ TextArea* TAArray::remove(int index){
 TextArea* TAArray::remove(const string& id){
     for (int i = 0; i < count; i++) {
         if (textAreas[i]->getID() == id) {  // Compare IDs
-            return removeTextArea(i);  // Remove by index
+            return remove(i);  // Remove by index
         }
     }
     return nullptr;
