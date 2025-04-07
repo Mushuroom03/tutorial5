@@ -43,7 +43,7 @@ bool TAArray::add(TextArea* ta, int index)
 TextArea* TAArray::remove(const string& id){
     for (int i = 0; i < size; i++)
     {
-        if (taArray[i]->getId() == id)
+        if (taArray[i]->getID() == id)
         {
             TextArea* ta = taArray[i];
             for (int j = i; j < size - 1; j++)
@@ -74,7 +74,7 @@ TextArea* TAArray::remove(int index){
 TextArea* TAArray::get(const string& id) const{
     for (int i = 0; i < size; i++)
     {
-        if (taArray[i]->getId() == id)
+        if (taArray[i]->getID() == id)
         {
             return taArray[i];
         }
