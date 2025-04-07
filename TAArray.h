@@ -1,29 +1,27 @@
-#ifndef TAARRAY_H
-#define TAARRAY_H
-
-#include "TextArea.h"
 #include <iostream>
+#include "TextArea.h"
 
-class TAArray {
+
+using namespace std;
+
+
+class TAArray
+{       
+    public:
+        TAArray();
+        ~TAArray();
+
+        bool add(TextArea* ta);
+        bool add(TextArea* ta, int index);
+        TextArea* remove(const string& id);
+        TextArea* remove(int index);
+        TextArea* get(const string& id) const;
+        TextArea* get(int index) const;
+        int getSize() const{return size;}
+        bool isFull() const{return size == MAX_COMPONENTS;}
+    
     private:
-    TextArea* textAreas[MAX_COMPONENTS];
-    int count;
+        int size;
+        TextArea** taArray;
 
-    public: 
-    TAArray();
-    ~TAArray();
-
-    bool add(TextArea* ta);
-    bool add(TextArea* ta, int index);
-
-    TextArea* remove(int index);
-    TextArea* remove(const string& id);
-
-    TextArea* get(int index) const;
-    TextArea* get(const string& id) const;
-
-    int getSize() const;
-    void printTextAreas() const;
 };
-
-#endif

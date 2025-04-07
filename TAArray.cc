@@ -1,86 +1,91 @@
 #include "TAArray.h"
 
-
-TAArray::TAArray() : count(0) {
-    for(int i = 0; i < MAX_COMPONENTS; i++)
-        textAreas[i] = nullptr;
+TAArray::TAArray()
+{
+    size = 0;
+    taArray = new TextArea*[MAX_COMPONENTS];
 }
 
 TAArray::~TAArray(){
-    for(int i = 0; i < count; i++)
-        delete textAreas[i];
+    // for (int i = 0; i < size; i++)
+    // {
+    //     delete taArray[i];
+    // }
+    delete[] taArray;
 }
 
-bool TAArray::add(TextArea* ta){
-    if (count >= MAX_COMPONENTS) {
-        cout << "Array is full." << endl;
+bool TAArray::add(TextArea* ta)
+{
+    if (size >= MAX_COMPONENTS)
+    {
         return false;
     }
-    textAreas[count++] = ta;
+    taArray[size] = ta;
+    size++;
     return true;
 }
 
-bool TAArray::add(TextArea* ta, int index){
-    if(index <0 || index >= count || count >= MAX_COMPONENTS){
-        cout << "Invalid index or TAArray is full." << endl;
+bool TAArray::add(TextArea* ta, int index)
+{
+    if (index < 0 || index >= MAX_COMPONENTS || size >= MAX_COMPONENTS)
+    {
         return false;
     }
-    for(int i = count; i < index; i--){
-        textAreas[i] = textAreas[i-1];
+    for (int i = size; i > index; i--)
+    {
+        taArray[i] = taArray[i - 1];
     }
-    textAreas[index] = ta;
-    count++;
+    taArray[index] = ta;
+    size++;
     return true;
-}
-
-TextArea* TAArray::remove(int index){
-    if(index < 0 || index >= count){
-        cout << "Invalid index" << endl;
-        return nullptr;
-    }
-    TextArea* removedTA = textAreas[index];
-
-    for(int i = index; i < count - 1; i++){
-        textAreas[i] = textAreas[i + 1];
-    }
-    textAreas[count-1] = nullptr;
-    count--;
-    return removedTA;
 }
 
 TextArea* TAArray::remove(const string& id){
-    for (int i = 0; i < count; i++) {
-        if (textAreas[i]->getID() == id) {  // Compare IDs
-            return remove(i);  // Remove by index
+    for (int i = 0; i < size; i++)
+    {
+        if (taArray[i]->getId() == id)
+        {
+            TextArea* ta = taArray[i];
+            for (int j = i; j < size - 1; j++)
+            {
+                taArray[j] = taArray[j + 1];
+            }
+            size--;
+            return ta;
         }
     }
     return nullptr;
 }
 
-TextArea* TAArray::get(int index) const {
-    if (index < 0 || index >= count) {
-        std::cerr << "Invalid index!" << std::endl;
+TextArea* TAArray::remove(int index){
+    if (index < 0 || index >= size)
+    {
         return nullptr;
     }
-    return textAreas[index];
+    TextArea* ta = taArray[index];
+    for (int i = index; i < size - 1; i++)
+    {
+        taArray[i] = taArray[i + 1];
+    }
+    size--;
+    return ta;
 }
 
-TextArea* TAArray::get(const std::string& id) const {
-    for (int i = 0; i < count; i++) {
-        if (textAreas[i]->getID() == id) {
-            return textAreas[i];
+TextArea* TAArray::get(const string& id) const{
+    for (int i = 0; i < size; i++)
+    {
+        if (taArray[i]->getId() == id)
+        {
+            return taArray[i];
         }
     }
     return nullptr;
 }
 
-int TAArray::getSize() const {
-    return count;
-}
-
-void TAArray::printTextAreas() const {
-    std::cout << "TAArray contains " << count << " TextAreas:\n";
-    for (int i = 0; i < count; i++) {
-        textAreas[i]->print();
+TextArea* TAArray::get(int index) const{
+    if (index < size && index >= 0)
+    {
+        return taArray[index];
     }
-} 
+    return nullptr;
+}
