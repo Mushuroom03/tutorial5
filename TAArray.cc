@@ -74,7 +74,7 @@ TextArea* TAArray::get(const std::string& id) const {
     return nullptr;
 }
 
-int TAArray::getCount() const {
+int TAArray::getSize() const {
     return count;
 }
 
